@@ -1,0 +1,115 @@
+﻿@model eva_em.Models.FoodModel
+@{
+	ViewBag.Title = "Cafe Services";
+}
+
+
+@using (Html.BeginForm("updateFoodOrder", "Food", FormMethod.Post))
+{
+	<div data-role="main" class="ui-content">
+
+
+    	<ul data-role="listview">
+        	@foreach (var category in Model.foodCategoryList)
+        	{
+           	 
+            	var count = 0;
+            	var food = Model.foodOrder;
+          	 
+            	if (food.FoodCategoryID == category.FoodCategoryID)
+            	{
+            	<li data-role="collapsible" data-inset="false">
+                	<h2>@category.FoodCategoryName</h2>
+
+
+                	<ul data-role="listview">
+                   	 
+                   	 
+                       	 
+
+
+
+
+                            	<li>
+                                	<div class="ui-grid-a">
+                                    	<div class="ui-block-a">
+                                        	<div class="ui-bar ui-bar-a" style="height: 80px;">
+                                            	@{var FoodWithPrice = @food.FoodName + " -- Rs." + @food.Price; }
+                                            	<label>  @Html.CheckBox("FoodActive" + food.FoodID, new { @class = "clsChkFood", data_mini = "true", disabled ="disabled" }) @FoodWithPrice </label>
+                                            	@Html.TextBoxFor(m => m.foodOrder.Quantity, new { @class = "clsTxtQty", placeholder = "Quantity" })
+                                        	</div>
+                                    	</div>
+                                    	<div class="ui-block-b">
+                                        	<div class="ui-bar ui-bar-a" style="height: 80px;">
+                                            	@Html.TextBoxFor(m => m.foodOrder.RequiredAt, new { @class = "clsTxtQty", data_mini = "true", placeholder = "Date", data_role = "date", Value = Model.foodOrder.RequiredAt.ToString("d") })
+
+
+                                            	@{var name = "foodOrder.RequiredAtTime";}
+                                            	<input value=@Model.foodOrder.RequiredAtTime.ToString("t") class="clsTxtTime" data-mini="true" type="text" data-role="datebox" data-options='{"mode":"timebox"}' data-val="true" data-val-date="The field RequiredAtTime must be a date." data-val-required="The RequiredAtTime field is required." name=@name placeholder="Time" />
+
+
+
+
+                                        	</div>
+
+
+                                    	</div>
+                                	</div>
+
+
+
+
+
+
+
+
+                                	@Html.HiddenFor(m => m.foodOrder.FoodID)
+                            	</li>
+                      	 
+                   	 
+
+
+
+
+                	</ul>
+            	</li>
+                        	}
+                       	 
+            	count++;
+        	}
+    	</ul>
+    	@if (Model.foodOrder.Status == 5)
+    	{
+        	if (Model.isAdmin)
+        	{
+            	<input type="submit" value="Completed" name="Completed" class="ui-btn ui-mini ui-corner-all"  />
+	<input type="submit" value="Reject" name="Completed" class="ui-btn ui-mini ui-corner-all"  />
+        	}
+        	else
+        	{
+            	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" />
+            	<input type="submit" value="Delete" name="Cancel" class="ui-btn ui-mini ui-corner-all" />
+        	}
+
+
+
+
+    	}
+	</div>
+
+
+	@Html.HiddenFor(m => m.foodOrder.OrderID)
+
+
+	@Html.HiddenFor(m => m.profileID)
+}
+<script type="text/javascript">
+
+
+	$(document).ready(function () {
+  	 
+   	 
+
+
+	});
+</script>

@@ -1,0 +1,77 @@
+﻿@model eva_em.Models.GuestHouseModel
+@{
+	ViewBag.Title = "Cab Booking";
+}
+
+
+@using (Html.BeginForm("saveGuestHouseBooking", "GuestHouse", FormMethod.Post))
+{
+	<div data-role="main" class="ui-content">
+   	 
+    	@*<input id="mode9" type="text" data-role="datebox" data-options='{"mode":"timebox"}' />*@
+    	@Html.DropDownListFor(m => m.GuestHouseBooking.GuestHouseID, new SelectList(Model.GuestHouseList, "GuestHouseID", "GuestHouseName"), "Select a Guest House", new { data_mini = "true", @class = "clsAddress1", id = "drpCountry1" })
+    	<div class="ui-corner-all custom-corners">
+        	<div class="ui-bar ui-bar-a">
+            	Booking Date
+        	</div>
+        	<div class="ui-body ui-body-a">
+            	<div class="ui-grid-a">
+                	<div class="ui-block-a">
+                    	<label>Check-in:</label>
+                    	@Html.TextBoxFor(m => m.GuestHouseBooking.BookingStartDate, new { data_role = "date", Value = Model.GuestHouseBooking.BookingStartDate.ToString("d") })
+                	</div>
+                	<div class="ui-block-b">
+                    	<label>Check-out:</label>
+                    	@Html.TextBoxFor(m => m.GuestHouseBooking.BookingEndDate, new { data_role = "date", Value = Model.GuestHouseBooking.BookingEndDate.ToString("d") })
+                	</div>
+            	</div>
+
+
+        	</div>
+       	 
+       	 
+    	</div>
+    	<div class="ui-body ui-body-a">
+        	<div class="ui-grid-a">
+            	<div class="ui-block-a">
+                	<label>Number of Guests:</label>
+            	</div>
+            	<div class="ui-block-b">
+                	@Html.TextBoxFor(m => m.GuestHouseBooking.numOfGuests)
+            	</div>
+        	</div>
+
+
+    	</div>
+    	@if (Model.isAdmin)
+    	{
+        	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" id="btnSaveRoaster" />
+        	<label>Remarks:</label>
+        	@Html.TextAreaFor(m => m.GuestHouseBooking.Remarks)
+        	<div class="ui-grid-a">
+            	<div class="ui-block-a">
+                	@Html.ActionLink("Approve", "ApproveGuestHouseBooking", new { bookingID = Model.GuestHouseBooking.BookingID, profileID = Model.GuestHouseBooking.ProfileID }, new { @class = "ui-btn ui-mini ui-corner-all" })
+            	</div>
+            	<div class="ui-block-b">
+                	@Html.ActionLink("Reject", "RejectGuestHouseBooking", new { bookingID = Model.GuestHouseBooking.BookingID, profileID = Model.GuestHouseBooking.ProfileID }, new { @class = "ui-btn ui-mini ui-corner-all" })
+            	</div>
+        	</div>
+       	 
+       	 
+    	}
+    	else
+    	{
+        	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" id="btnSaveRoaster" />
+        	if (Model.GuestHouseBooking.BookingID > 0 && Model.GuestHouseBooking.StatusID == 1)
+        	{
+            	@Html.ActionLink("Delete", "DeleteGuestHouseBooking", new { bookingID = Model.GuestHouseBooking.BookingID, profileID = Model.GuestHouseBooking.ProfileID }, new { @class = "ui-btn ui-mini ui-corner-all" })
+        	}
+    	}
+    	@Html.HiddenFor(m=>m.GuestHouseBooking.ProfileID)
+    	@Html.HiddenFor(m => m.GuestHouseBooking.BookingID)
+    	@Html.HiddenFor(m => m.GuestHouseBooking.LastUpdatesBy)
+    	@Html.HiddenFor(m => m.GuestHouseBooking.StatusID)
+    	@Html.HiddenFor(m => m.GuestHouseBooking.StepID)
+	</div>
+   
+}

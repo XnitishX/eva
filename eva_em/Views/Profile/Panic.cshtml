@@ -1,0 +1,97 @@
+﻿@model eva_em.Models.PanicModel
+@{
+	ViewBag.Title = "Panic";
+}
+
+
+@using (Html.BeginForm("SavePanic", "Profile", FormMethod.Post, new { id = "form1" }))
+{
+	<div data-role="main" class="ui-content">
+
+
+    	<input type="submit" value="Panic Now" name="Alert" class="ui-btn ui-mini ui-corner-all" style="background-color:red"/>
+
+
+    	@*<div data-role="fieldcontainer">
+        	<label for="fname" data-theme="d">First Name:</label>
+        	<input type="text" id="fname" name="fname" data-theme="d" placeholder="Enter First Name" />
+    	</div>*@
+
+
+    	<label>Name:</label>
+    	@Html.TextBoxFor(m => m.panicDetails.name, new { id = "name" })
+    	<label>Email:</label>
+    	@Html.TextBoxFor(m => m.panicDetails.email)
+    	<label>Phone:</label>
+    	@Html.TextBoxFor(m => m.panicDetails.phone)
+
+
+    	<label>Alert Text:</label>
+    	@Html.TextAreaFor(m => m.panicDetails.text)
+
+
+   	 
+    	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" />
+   	 
+
+
+	</div>
+	@Html.HiddenFor(m => m.panicDetails.ProfileID)
+}
+
+
+<script type="text/javascript">
+
+
+    
+	$(window).load(function () {
+   	 
+    	$(document).ready(function () {
+
+
+
+
+        	//$('#form1').submit(function () {
+        	//	alert("submitted");
+        	//	return false;
+        	//});
+
+
+        	$('#form1').validate({
+           	 
+            	rules: {
+                	'panicDetails.name': {
+                    	required: true
+                	},
+                	//lname: {
+                	//	required: true
+                	//},
+                	//email: {
+                	//	required: true
+                	//}
+            	},
+            	messages: {
+                	'panicDetails.name': {
+                    	required: "Please enter your first name."
+                	}
+                	//,
+                	//lname: {
+                	//	required: "Please enter your last name."
+                	//},
+                	//lname: {
+                	//	required: "Please enter your email."
+                	//}
+            	},
+            	errorPlacement: function (error, element) {
+                	error.appendTo(element.parent().prev());
+            	}
+        	});
+    	});
+   	 
+	}
+	);
+
+
+	</script>
+
+

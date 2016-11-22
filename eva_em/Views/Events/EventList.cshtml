@@ -1,0 +1,22 @@
+﻿@model eva_em.Models.EventModel
+@{
+	ViewBag.Title = "Events";
+}
+
+
+@using (Html.BeginForm())
+{
+	<div>
+    	@Html.ActionLink("Add Event", "addEvent", "Events", null, new { @class = "ui-btn ui-btn-icon-left ui-icon-plus" })
+	</div>
+	<ul data-role="listview" data-inset="true">
+    	@foreach (var c in Model.evntList)
+    	{
+        	<li>@Html.ActionLink(c.EventName, "editEvent", "Events", new { eventID = c.EventID }, null)</li>
+    	}
+	</ul>
+
+
+}
+
+

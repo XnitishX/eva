@@ -1,0 +1,26 @@
+﻿@model eva_em.Models.FoodModel
+@{
+    ViewBag.Title = "Cafe Service";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.ActionLink("Setup Menu", "FoodMenuAdmin", "Food", new { locationID = Model.locationID, profileID = Model.profileID }, new { @class = "ui-btn ui-btn-icon-left ui-icon-plus" })
+    </div>
+    <div>
+        @Html.ActionLink("Order Food", "addFoodOrder", "Food", new { locationID = Model.locationID, profileID = Model.profileID }, new { @class = "ui-btn ui-btn-icon-left ui-icon-plus" })
+    </div>
+    <div>
+        @Html.ActionLink("View Orders", "processFoodOrder", "Food", new { locationID = Model.locationID, profileID = Model.profileID }, new { @class = "ui-btn ui-btn-icon-left ui-icon-plus" })
+    </div>
+    <ul data-role="listview" data-inset="true">
+        @foreach (var c in Model.foodOrderList)
+        {
+            string value = c.FoodName + " - - " + c.RequiredAt;
+            <li>@Html.ActionLink(value, "editFoodOrder", "Food", new { OrderID = c.OrderID, profileID = Model.profileID, isAdmin = false }, null)</li>    }
+    </ul>
+    @Html.HiddenFor(m => m.profileID)
+    @Html.HiddenFor(m => m.locationID)
+}

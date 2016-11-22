@@ -1,0 +1,21 @@
+﻿@model eva_em.Models.AddressModel
+@{
+	Layout = null;
+}
+
+
+
+
+	@Html.TextBoxFor(m => m.address.Line1, new { data_mini = "true", data_clear_btn = "true" })
+	@Html.TextBoxFor(m => m.address.Line2, new { data_mini = "true", data_clear_btn = "true" })
+	@Html.DropDownListFor(m => m.address.Country, new SelectList(Model.addressLists.countries, "CountryID", "CountryName"), new { data_mini = "true", @class = "clsAddress", id= "drpCountry"})
+	@Html.DropDownListFor(m => m.address.State, new SelectList(Model.addressLists.states, "StateID", "StateName"), new { data_mini = "true", @class = "clsAddress", id = "drpState" })
+	@Html.DropDownListFor(m => m.address.City, new SelectList(Model.addressLists.cities, "CityID", "CityName"), new { data_mini = "true", @class = "clsAddress", id = "drpCity" })
+	@Html.DropDownListFor(m => m.address.Area, new SelectList(Model.addressLists.areas, "AreaID", "AreaName"), new { data_mini = "true", @class = "clsAddress", id = "drpArea" })
+	@Html.TextBoxFor(m => m.address.Pin, new { data_mini = "true", data_clear_btn = "true" })
+
+
+
+
+
+

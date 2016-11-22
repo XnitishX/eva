@@ -1,0 +1,17 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+<div data-role="main" class="ui-content">
+	@Html.ActionLink("Roaster Cab", "viewRoaster", "Cab", new { profileID = 1 }, new { @class = "ui-btn ui-btn-icon-top ui-icon-location" })
+	@Html.ActionLink("Cafe Services", "viewFoodOrder", "Food", new {locationID=1, profileID = 1 }, new { @class = "ui-btn ui-btn-icon-top ui-icon-star" })
+	@Html.ActionLink("Event Calendar", "EventList", "Events", null, new { @class = "ui-btn ui-btn-icon-top ui-icon-calendar" })
+	@Html.ActionLink("Guest House", "viewGuestHouseBooking", "GuestHouse", new { profileID = 1 }, new { @class = "ui-btn ui-btn-icon-top ui-icon-home" })
+	@Html.ActionLink("Help", "getData", "Help", null, new { @class = "ui-btn ui-btn-icon-top ui-icon-eye" })
+	@Html.ActionLink("Panic", "Panic", "Profile", new { profileID = 1 }, new { @class = "ui-btn ui-btn-icon-top ui-icon-plus" })
+	@*<a href="#pageCab" class="ui-btn ui-btn-icon-top ui-icon-location">Cab Pickup Drop</a>
+	<a href="#pageCafe" class="ui-btn ui-btn-icon-top ui-icon-star">Cafe Services</a>
+	<a href="#pageEvent" class="ui-btn ui-btn-icon-top ui-icon-calendar">Event Calendar</a>
+	<a href="#pageGuest" class="ui-btn ui-btn-icon-top ui-icon-home">Guest House</a>
+	<a href="#pageHelp" class="ui-btn ui-btn-icon-top ui-icon-eye">Help</a>
+	<a href="#pagePanic" class="ui-btn ui-btn-icon-top ui-icon-plus">Panic</a>*@
+</div>

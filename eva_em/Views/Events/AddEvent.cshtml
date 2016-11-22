@@ -1,0 +1,68 @@
+﻿@model eva_em.Models.EventModel
+@{
+	ViewBag.Title = "Events";
+}
+
+
+@using (Html.BeginForm("saveEvent", "Events", FormMethod.Post))
+{
+	<div data-role="main" class="ui-content">
+
+
+  	 
+        	<label>Event Name:</label>
+        	@Html.TextBoxFor(m => m.evnt.EventName)
+    	<label>Event Description:</label>
+    	@Html.TextAreaFor(m => m.evnt.EventDescription)
+
+
+
+
+
+
+
+
+    	<div class="ui-corner-all custom-corners">
+        	@*<div class="ui-bar ui-bar-a">
+            	Event Name:
+        	</div>*@
+        	<div class="ui-body ui-body-a">
+            	<div class="ui-grid-a">
+                	<div class="ui-block-a">
+                    	<label>Start Date:</label>
+                    	@Html.TextBoxFor(m => m.evnt.StartDate)
+                	</div>
+                	<div class="ui-block-b">
+                    	<label>End Date:</label>
+                    	@Html.TextBoxFor(m => m.evnt.EndDate)
+                	</div>
+            	</div>
+
+
+        	</div>
+        	<div class="ui-body ui-body-a">
+            	<div class="ui-grid-a">
+                	<div class="ui-block-a">
+                    	<label>Start Time:</label>
+                    	@Html.TextBoxFor(m => m.evnt.StartTime)
+                	</div>
+                	<div class="ui-block-b">
+                    	<label>End Time:</label>
+                    	@Html.TextBoxFor(m => m.evnt.EndTime)
+                	</div>
+            	</div>
+
+
+        	</div>
+        	<label>Alert Text:</label>
+        	@Html.TextAreaFor(m => m.evnt.AlertText)
+        	@if(Model.isAdmin == true)
+        	{
+            	<input type="submit" value="Send Alert" name="Alert" class="ui-btn ui-mini ui-corner-all" />
+            	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" />
+        	}
+    	</div>
+  	 
+	</div>
+	@Html.HiddenFor(m => m.evnt.EventID)
+}

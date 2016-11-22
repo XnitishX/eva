@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>@ViewBag.Title</title>
+	<meta name="viewport" content="width=device-width">
+    <!--
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+	<script src="http://cdn.rawgit.com/jquery/jquery-ui/1.10.4/ui/jquery.ui.datepicker.js"></script>
+	<script id="mobile-datepicker" src="http://cdn.rawgit.com/arschmitz/jquery-mobile-datepicker-wrapper/v0.1.1/jquery.mobile.datepicker.js"></script>
+	<link rel="stylesheet" href="http://cdn.rawgit.com/arschmitz/jquery-mobile-datepicker-wrapper/v0.1.1/jquery.mobile.datepicker.css">
+	<link rel="stylesheet" type="text/css" href="custom.css" />
+	<link rel="stylesheet" type="text/css" href="http://multidatespickr.sourceforge.net/css/mdp.css" />
+	<script type="text/javascript" src="http://multidatespickr.sourceforge.net/jquery-ui.multidatespicker.js"></script>
+
+
+	<link rel="stylesheet" href="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.min.css" />
+	<script type="text/javascript" src="http://cdn.jtsage.com/external/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="http://dev.jtsage.com/jQM-DateBox/js/doc.js"></script>
+	<script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.core.min.js"></script>
+	<script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.calbox.min.js"></script>
+	<script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.datebox.min.js"></script>
+	<script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.flipbox.min.js"></script>
+	<script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.slidebox.min.js"></script>
+	<script type="text/javascript" src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.customflip.min.js"></script>
+	<script type="text/javascript" src="http://cdn.jtsage.com/datebox/i18n/jqm-datebox.lang.utf8.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    -->
+    <script src="~/ref/jqm-datebox-1.4.5.core.min.js"></script>
+    <script src="~/ref/doc.js"></script>
+    <script src="~/ref/jqm-datebox-1.4.5.mode.calbox.min.js"></script>
+    <script src="~/ref/jqm-datebox-1.4.5.mode.customflip.min.js"></script>
+    <script src="~/ref/jqm-datebox-1.4.5.mode.datebox.min.js"></script>
+    <script src="~/ref/jqm-datebox-1.4.5.mode.flipbox.min.js"></script>
+    <script src="~/ref/jqm-datebox-1.4.5.mode.slidebox.min.js"></script>
+    <script src="~/ref/jqm-datebox.lang.utf8.js"></script>
+    <script src="~/ref/jquery-1.11.3.min.js"></script>
+    <script src="~/ref/jquery-ui.multidatespicker.js"></script>
+    <script src="~/ref/jquery.mobile-1.4.5.min.js"></script>
+    <script src="~/ref/jquery.mobile.datepicker.js"></script>
+    <script src="~/ref/jquery.mousewheel.min.js"></script>
+    <script src="~/ref/jquery.ui.datepicker.js"></script>
+    <script src="~/ref/jquery.validate.min.js"></script>
+    <link href="~/ref/jqm-datebox-1.4.5.min.css" rel="stylesheet" />
+    <link href="~/ref/jquery.mobile-1.4.5.min.css" rel="stylesheet" />
+    <link href="~/ref/jquery.mobile.datepicker.css" rel="stylesheet" />
+    <link href="~/ref/mdp.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="custom.css" />
+
+
+
+
+	<style type="text/css">
+    	.error {
+        	color: red;
+    	}
+	</style>
+</head>
+<body>
+	<div data-role="page" id="home">
+
+
+    	<div data-role="header">
+        	@Html.ActionLink("Profile", "getData", "Profile", new { profileID = 1 }, new { @class = "ui-btn ui-btn-icon-left ui-icon-user" })
+        	@*<a href="#pageProfile" class="">Profile</a>*@
+        	<h1>Comapany Logo</h1>
+        	@Html.ActionLink("Menu", "Index", "Home", null, new { @class = "ui-btn ui-btn-icon-left ui-icon-arrow-u" })
+        	@*<a href="#pageHome" class="ui-btn ui-btn-icon-left ui-icon-arrow-u">Menu</a>*@
+    	</div>
+    	@RenderBody()
+    	<div data-role="footer" data-position="fixed">
+        	<div data-role="navbar">
+            	<ul>
+                	<li><a href="#">About EVA</a></li>
+                	<li><a href="#">ContactUs  </a></li>
+                	<li><a href="#">www.eve.com</a></li>
+            	</ul>
+        	</div>
+    	</div>
+
+
+	</div>
+</body>
+</html>
+
+
+
+

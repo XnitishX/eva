@@ -1,0 +1,277 @@
+﻿@model eva_em.Models.ProfileModel
+@{
+	ViewBag.Title = "Profile";
+}
+
+
+@using (Html.BeginForm("SaveProfile", "Profile", FormMethod.Post))
+{
+	<div data-role="main" class="ui-content">
+
+
+
+
+    	<div class="ui-grid-a">
+        	<div class="ui-block-a">
+            	@*<label for="empName">Name:</label>
+                	<input type="text" data-clear-btn="true" id="txtempName" data-mini="true">
+
+
+                	<label for="email">E-mail:</label>
+                	<input type="email" name="email" id="email" data-mini="true">
+
+
+                	<label for="empName">Phone:</label>
+                	<input type="text" data-clear-btn="true" id="txtempPhone" data-mini="true">*@
+            	<label>First Name:</label>
+            	@Html.TextBoxFor(m => m.profile.FirstName, new { id = "txtfname", data_mini = "true", data_clear_btn = "true" })
+            	<label>Last Name:</label>
+            	@Html.TextBoxFor(m => m.profile.LastName, new { id = "txtfname", data_mini = "true", data_clear_btn = "true" })
+            	<label>Date of Birth:</label>
+            	@Html.TextBoxFor(m => m.profile.DOB, new { id = "txtfname", data_role = "Date", data_mini = "true", data_clear_btn = "true", Value = Model.profile.DOB.ToString("d") })
+          	 
+
+
+           	 
+        	</div>
+        	<div class="ui-block-b">
+            	<div style="text-align: center">
+                	<img src="http://placehold.it/100x130">
+            	</div>
+        	</div>
+    	</div>
+    	<fieldset class="ui-grid-a">
+        	<div class="ui-block-a">
+            	<label for="email">E-mail:</label>
+            	@Html.TextBoxFor(m => m.profile.Email, new { id = "txtEmail", data_mini = "true", data_clear_btn = "true" })
+            	<label for="empID">Emp Id:</label>
+            	@Html.TextBoxFor(m => m.profile.EmpID, new { data_mini = "true", data_clear_btn = "true" })
+        	</div>
+        	<div class="ui-block-b">
+            	<label for="empName">Phone:</label>
+            	@Html.TextBoxFor(m => m.profile.Phone, new { id = "txtPhone", data_mini = "true", data_clear_btn = "true" })
+            	<label for="empBranch">Branch:</label>
+            	@Html.DropDownListFor(m => m.profile.locationID, new SelectList(Model.LocationList, "locationID", "locationName"), "Select Branch", new { data_mini = "true" })
+        	</div>
+    	</fieldset>
+    	<label for="empAddress1">Address1:</label>
+    	<div id="divAddress1">
+        	@Html.TextBoxFor(m => m.address1.Line1, new { data_mini = "true", data_clear_btn = "true" })
+        	@Html.TextBoxFor(m => m.address1.Line2, new { data_mini = "true", data_clear_btn = "true" })
+        	@Html.DropDownListFor(m => m.address1.Country, new SelectList(Model.addressList1.countries, "CountryID", "CountryName"), "Select a Country",new { data_mini = "true", @class = "clsAddress1", id = "drpCountry1" })
+        	@Html.DropDownListFor(m => m.address1.State, new SelectList(Model.addressList1.states, "StateID", "StateName"), "Select a State", new { data_mini = "true", @class = "clsAddress1", id = "drpState1" })
+        	@Html.DropDownListFor(m => m.address1.City, new SelectList(Model.addressList1.cities, "CityID", "CityName"), "Select a City", new { data_mini = "true", @class = "clsAddress1", id = "drpCity1" })
+        	@Html.DropDownListFor(m => m.address1.Area, new SelectList(Model.addressList1.areas, "AreaID", "AreaName"), "Select a Area", new { data_mini = "true", @class = "clsAddress1", id = "drpArea1" })
+        	@Html.TextBoxFor(m => m.address1.Pin, new { data_mini = "true", data_clear_btn = "true" })
+    	</div>
+
+
+    	<label for="empAddress2">Address2:</label>
+    	<div id="divAddress2">
+        	@Html.TextBoxFor(m => m.address2.Line1, new { data_mini = "true", data_clear_btn = "true" })
+        	@Html.TextBoxFor(m => m.address2.Line2, new { data_mini = "true", data_clear_btn = "true" })
+        	@Html.DropDownListFor(m => m.address2.Country, new SelectList(Model.addressList2.countries, "CountryID", "CountryName"), "Select a Country", new { data_mini = "true", @class = "clsAddress2", id = "drpCountry2" })
+        	@Html.DropDownListFor(m => m.address2.State, new SelectList(Model.addressList2.states, "StateID", "StateName"), "Select a State", new { data_mini = "true", @class = "clsAddress2", id = "drpState2" })
+        	@Html.DropDownListFor(m => m.address2.City, new SelectList(Model.addressList2.cities, "CityID", "CityName"), "Select a City", new { data_mini = "true", @class = "clsAddress2", id = "drpCity2" })
+        	@Html.DropDownListFor(m => m.address2.Area, new SelectList(Model.addressList2.areas, "AreaID", "AreaName"), "Select a Area", new { data_mini = "true", @class = "clsAddress2", id = "drpArea2" })
+        	@Html.TextBoxFor(m => m.address2.Pin, new { data_mini = "true", data_clear_btn = "true" })
+    	</div>
+    	<fieldset data-role="controlgroup" data-type="horizontal">
+        	<legend>Default Address:</legend>
+
+
+        	@Html.RadioButtonFor(model => model.profile.DefaultAddress, 1, new { value = 1, @checked = "checked", id = "rdAddress1" })
+        	<label for="rdAddress1">Address1</label>
+
+
+        	@Html.RadioButtonFor(model => model.profile.DefaultAddress, 2, new { value = 2, id = "rdAddress2" })
+        	<label for="rdAddress2">Address2</label>
+
+
+
+
+    	</fieldset>
+    	<div class="ui-corner-all custom-corners">
+        	<div class="ui-bar ui-bar-a">
+            	Emergency Contact
+        	</div>
+        	<div class="ui-body ui-body-a">
+            	<fieldset class="ui-grid-a">
+                	<div class="ui-block-a">
+                    	<label>Name:</label>
+                    	@Html.TextBoxFor(m => m.profile.EmergencyName, new { data_mini = "true", data_clear_btn = "true" })
+                	</div>
+                	<div class="ui-block-b">
+
+
+                    	<label>Tel:</label>
+                    	@Html.TextBoxFor(m => m.profile.EmergencyPhone, new { data_mini = "true", data_clear_btn = "true" })
+                	</div>
+            	</fieldset>
+            	<fieldset class="ui-grid-a">
+                	<div class="ui-block-a">
+                    	<label>Relation:</label>
+                    	@Html.TextBoxFor(m => m.profile.EmergencyRelation, new { data_mini = "true", data_clear_btn = "true" })
+                	</div>
+                	<div class="ui-block-b">
+
+
+                    	<label>Email:</label>
+                    	@Html.TextBoxFor(m => m.profile.EmergencyEmail, new { data_mini = "true", data_clear_btn = "true" })
+                	</div>
+            	</fieldset>
+        	</div>
+    	</div>
+    	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" id="btnSaveProfile" />
+    	@Html.HiddenFor(m => m.profile.CompanyID)
+    	@Html.HiddenFor(m => m.profile.ProfileID)
+    	@Html.HiddenFor(m => m.profile.AddressID1)
+    	@Html.HiddenFor(m => m.profile.AddressID2)
+    	@Html.HiddenFor(m => m.address1.AddressID)
+    	@Html.HiddenFor(m => m.address2.AddressID)
+	</div>
+}
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+	$(document).ready(function () {
+   	 
+    	$('#drpCountry1').change(function () {
+        	if ($.this.val() = "")
+        	{
+            	$('#drpState1').html('<option>Select a City</option>');
+            	$('#drpCity1').html('<option>Select a City</option>');
+            	$('#drpArea1').html('<option>Select a Area</option>');
+            	$('select').selectmenu('refresh');
+            	return false;
+        	}
+        	$.getJSON('StateList/' + $('#drpCountry1').val(), function (data) {
+            	var items = '<option>Select a State</option>';
+            	$.each(data, function (i, state) {
+                	items += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+            	});
+            	$('#drpState1').html(items);
+            	$('#drpCity1').html('<option>Select a City</option>');
+            	$('#drpArea1').html('<option>Select a Area</option>');
+            	$('select').selectmenu('refresh');
+        	});
+
+
+    	});
+
+
+    	$('#drpState1').change(function () {
+        	if ($.this.val() = "") {
+            	$('#drpCity1').html('<option>Select a City</option>');
+            	$('#drpArea1').html('<option>Select a Area</option>');
+            	$('select').selectmenu('refresh');
+            	return false;
+        	}
+        	$.getJSON('CityList/' + $('#drpState1').val(), function (data) {
+            	var items = '<option>Select a City</option>';
+            	$.each(data, function (i, city) {
+                	items += "<option value='" + city.Value + "'>" + city.Text + "</option>";
+            	});
+            	$('#drpCity1').html(items);
+            	$('#drpArea1').html('<option>Select a Area</option>');
+            	$('select').selectmenu('refresh');
+        	});
+
+
+    	});
+
+
+    	$('#drpCity1').change(function () {
+        	if ($.this.val() = "") {
+            	$('#drpArea1').html('<option>Select a Area</option>');
+            	$('select').selectmenu('refresh');
+            	return false;
+        	}
+        	$.getJSON('AreaList/' + $('#drpCity1').val(), function (data) {
+
+
+            	var items = '<option>Select a Area</option>';
+
+
+            	$.each(data, function (i, area) {
+
+
+                	items += "<option value='" + area.Value + "'>" + area.Text + "</option>";
+
+
+            	});
+
+
+            	$('#drpArea1').html(items);
+            	$('select').selectmenu('refresh');
+        	});
+
+
+    	});
+
+
+    	$('#drpCountry2').change(function () {
+
+
+        	$.getJSON('StateList/' + $('#drpCountry2').val(), function (data) {
+            	var items = '<option>Select a State</option>';
+            	$.each(data, function (i, state) {
+                	items += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+            	});
+            	$('#drpState2').html(items);
+            	$('#drpCity2').html('<option>Select a City</option>');
+            	$('#drpArea2').html('<option>Select a Area</option>');
+            	$('select').selectmenu('refresh');
+        	});
+
+
+    	});
+
+
+    	$('#drpState2').change(function () {
+        	$.getJSON('CityList/' + $('#drpState2').val(), function (data) {
+            	var items = '<option>Select a City</option>';
+            	$.each(data, function (i, city) {
+                	items += "<option value='" + city.Value + "'>" + city.Text + "</option>";
+            	});
+            	$('#drpCity2').html(items);
+            	$('#drpArea2').html('<option>Select a Area</option>');
+            	$('select').selectmenu('refresh');
+        	});
+
+
+    	});
+
+
+    	$('#drpCity2').change(function () {
+
+
+        	$.getJSON('AreaList/' + $('#drpCity2').val(), function (data) {
+
+
+            	var items = '<option>Select a Area</option>';
+
+
+            	$.each(data, function (i, area) {
+
+
+                	items += "<option value='" + area.Value + "'>" + area.Text + "</option>";
+
+
+            	});
+
+
+            	$('#drpArea2').html(items);
+            	$('select').selectmenu('refresh');
+        	});
+
+
+    	});
+	});
+</script>

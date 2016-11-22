@@ -1,0 +1,17 @@
+﻿@model eva_em.Models.FoodModel
+@{
+    ViewBag.Title = "Cafe Service";
+}
+
+
+@using (Html.BeginForm())
+{
+    <ul data-role="listview" data-inset="true">
+        @foreach (var c in Model.foodOrderList)
+        {
+            string value = c.FoodName + " - - " + c.RequiredAt;
+            <li>@Html.ActionLink(value, "editFoodOrder", "Food", new { OrderID = c.OrderID, profileID = Model.profileID, isAdmin = true }, null)</li>    }
+    </ul>
+    @Html.HiddenFor(m => m.profileID)
+    @Html.HiddenFor(m => m.locationID)
+}

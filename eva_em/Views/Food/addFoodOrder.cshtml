@@ -1,0 +1,120 @@
+﻿@model eva_em.Models.FoodModel
+@{
+	ViewBag.Title = "Cafe Services";
+}
+
+
+@using (Html.BeginForm("saveFoodOrder", "Food", FormMethod.Post))
+{
+	<div data-role="main" class="ui-content">
+
+
+    	<ul data-role="listview">
+        	@foreach (var category in Model.foodCategoryList)
+        	{
+            	<li data-role="collapsible" data-inset="false">
+                	<h2>@category.FoodCategoryName</h2>
+
+
+                	<ul data-role="listview">
+                    	@{
+            	var count = 0;
+                    	}
+                    	@foreach (var food in Model.foodOrderList)
+                    	{
+                        	if (food.FoodCategoryID == category.FoodCategoryID)
+                        	{
+
+
+
+
+                            	<li>
+                                	<div class="ui-grid-a">
+                                    	<div class="ui-block-a">
+                                        	<div class="ui-bar ui-bar-a" style="height: 80px;">
+                                            	@{var FoodWithPrice =@food.FoodName  + " -- Rs." + @food.Price ; }
+                                            	<label>  @Html.CheckBox("FoodActive" + food.FoodID, new { @class = "clsChkFood", data_mini = "true" }) @FoodWithPrice </label>
+                                            	@Html.TextBoxFor(m => m.foodOrderList[@count].Quantity, new { @class = "clsTxtQty", placeholder = "Quantity" })
+                                        	</div>
+                                    	</div>
+                                    	<div class="ui-block-b">
+                                        	<div class="ui-bar ui-bar-a" style="height: 80px;">
+                                            	@Html.TextBoxFor(m => m.foodOrderList[@count].RequiredAt, new { @class = "clsTxtQty", data_mini = "true", placeholder = "Date", data_role = "date", Value = Model.foodOrderList[@count].RequiredAt.ToString("d") })
+
+
+                                            	@{var name = "foodOrderList[" + @count + "].RequiredAtTime";}
+                                            	<input class="clsTxtTime" data-mini="true" type="text" data-role="datebox" data-options='{"mode":"timebox"}' data-val="true" data-val-date="The field RequiredAtTime must be a date." data-val-required="The RequiredAtTime field is required." name=@name placeholder="Time" />
+
+
+
+
+                                        	</div>
+
+
+                                    	</div>
+                                	</div>
+
+
+
+
+
+
+
+
+                                	@Html.HiddenFor(m => m.foodOrderList[@count].FoodID)
+                            	</li>
+                        	}
+                        	count++;
+                    	}
+
+
+
+
+                	</ul>
+            	</li>
+        	}
+    	</ul>
+
+
+    	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" id="btnFoodMenu" />
+	</div>
+
+
+	@Html.HiddenFor(m => m.profileID)
+	@Html.HiddenFor(m => m.locationID)
+
+
+}
+<script type="text/javascript">
+
+
+	$(document).ready(function () {
+    	$('.clsTxtQty').val("");
+    	$('.clsTxtQty').attr("disabled", "disabled");
+    	$('.clsTxtTime').parent("div").addClass("ui-disabled");
+    	$('.clsChkFood').change(function () {
+        	if ($(this).prop('checked')) {
+            	$(this).closest('li').find('.clsTxtQty').val("");
+            	$(this).closest('li').find('.clsTxtQty').removeAttr("disabled");
+            	$(this).closest('li').find('.clsTxtTime').val("");
+            	$(this).closest('li').find('.clsTxtTime').parent("div").removeClass("ui-disabled");
+            	// enable
+           	 
+        	}
+        	else {
+
+
+            	$(this).closest('li').find('.clsTxtQty').val("");
+            	$(this).closest('li').find('.clsTxtQty').attr("disabled", "disabled");
+            	$(this).closest('li').find('.clsTxtTime').val("");
+            	$(this).closest('li').find('.clsTxtTime').parent("div").addClass("ui-disabled");
+        	}
+
+
+    	});
+
+
+
+
+	});
+</script>

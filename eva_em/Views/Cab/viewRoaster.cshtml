@@ -1,0 +1,21 @@
+﻿@model eva_em.Models.CabModel
+@{
+	ViewBag.Title = "Cab Booking";
+}
+
+
+@using (Html.BeginForm())
+{
+	<div>
+    	@Html.ActionLink("Add Roaster", "addRoaster", "Cab", new { profileID = 1 }, new { @class = "ui-btn ui-btn-icon-left ui-icon-plus" })
+	</div>
+	<ul data-role="listview" data-inset="true">
+    	@foreach (var c in Model.currentRoasterList)
+    	{
+        	string value = c.cabDate.ToString("dd/MMM/yyyy") + " - - - Pick: " + c.ShiftStartTime + " - - - Drop: " + c.ShiftEndTime;
+        	<li>@Html.ActionLink(value, "editRoaster", "Cab", new { profileID = 1, RoasterTypeID = c.RoasterTypeID, LocationID = c.LocationID, cabDate = c.cabDate, AddressID = c.AddressID, ShiftStartTime = c.ShiftStartTime, ShiftEndTime =c.ShiftEndTime },null)</li>
+    	}
+	</ul>
+    
+}
+

@@ -1,0 +1,25 @@
+﻿@model eva_em.Models.GuestHouseModel
+@{
+	ViewBag.Title = "Cab Booking";
+}
+
+
+@using (Html.BeginForm())
+{
+	<div>
+    	@Html.ActionLink("Book Guest House ", "addGuestHouseBooking", "GuestHouse", new { profileID = 1 }, new { @class = "ui-btn ui-btn-icon-left ui-icon-plus" })
+	</div>
+	<ul data-role="listview" data-inset="true">
+    	@foreach (var c in Model.currentGuestHouseBookingList)
+    	{
+        	string value = c.GuestHouseName + " - " + c.BookingStartDate.ToString("dd/MMM/yyyy") + " - " + c.BookingEndDate.ToString("dd/MMM/yyyy");
+        	<li>@Html.ActionLink(value, "editGuestHouseBooking", "GuestHouse", new { profileID = 1, bookingID = c.BookingID }, null)</li>
+    	}
+  	 
+
+
+	</ul>
+    
+
+
+}

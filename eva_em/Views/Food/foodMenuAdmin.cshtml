@@ -1,0 +1,72 @@
+﻿@model eva_em.Models.FoodModel
+@{
+	ViewBag.Title = "Cafe Services";
+}
+
+
+@using (Html.BeginForm("saveFoodMenu", "Food", FormMethod.Post))
+{
+	<div data-role="main" class="ui-content">
+
+
+    	<ul data-role="listview">
+        	@foreach (var category in Model.foodCategoryList)
+        	{
+        	<li data-role="collapsible" data-inset="false">
+            	<h2>@category.FoodCategoryName</h2>
+
+
+            	<ul data-role="listview">
+                	@{
+                    	var count = 0;
+                  	}
+                	@foreach (var food in Model.foodItemList)
+                	{
+                    	if (food.FoodCategoryID == category.FoodCategoryID)
+                    	{
+
+
+
+
+                    	<li>
+                        	@*<input name="checkbox-mini-0" id="checkbox-mini-0" type="checkbox" data-mini="true">
+                        	<label for="checkbox-mini-0">test</label>*@
+
+
+                        	<label>  @Html.CheckBox("FoodActive"+food.FoodID,food.Active, new { @class = "clsFood" }) @food.FoodName</label>
+                        	@Html.HiddenFor(m => m.foodItemList[@count].FoodID)
+                        	@Html.HiddenFor(m => m.foodItemList[@count].Active, new { @class = "clsIsActive" })
+                       	 
+                       	 
+                    	</li>
+                    	}
+                    	count++;
+                	}
+               	 
+               	 
+            	</ul>
+        	</li>
+        	}
+    	</ul>
+    	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" id="btnFoodMenu" />
+	</div>
+
+
+	@Html.HiddenFor(m => m.profileID)
+	@Html.HiddenFor(m => m.locationID)
+ 
+}
+<script type="text/javascript">
+
+
+	$(document).ready(function () {
+
+
+    	$('.clsFood').change(function () {
+        	$(this).closest('li').find('.clsIsActive').val($(this).prop('checked'))
+    	});
+
+
+   	 
+	});
+</script>

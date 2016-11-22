@@ -1,0 +1,70 @@
+﻿@model eva_em.Models.CabModel
+@{
+	ViewBag.Title = "Cab Booking";
+}
+
+
+@using (Html.BeginForm("saveRoaster", "Cab", FormMethod.Post))
+{
+	<div data-role="main" class="ui-content">
+    	<fieldset data-role="controlgroup" data-type="horizontal">
+        	@*<legend>Cab Pickup / Drop:</legend>*@
+      	 
+        	@Html.RadioButtonFor(model => model.roaster.RoasterTypeID, 1, new { value = 1, @checked = "checked", id = "rdroaster1" })
+        	<label for="rdroaster1">Both</label>
+        	@Html.RadioButtonFor(model => model.roaster.RoasterTypeID, 2, new { value = 2,  id = "rdroaster2" })
+        	<label for="rdroaster2">Pick</label>
+        	@Html.RadioButtonFor(model => model.roaster.RoasterTypeID, 3, new { value = 3,  id = "rdroaster3" })
+        	<label for="rdroaster3">Drop</label>
+    	</fieldset>
+    	@*<input data-role="date" data-inline="true" type="text">*@
+    	<div id="dtSelectedDates"></div>
+    	@Html.TextBoxFor(m => m.roaster.selectedDatesString, new { id="altField" })
+
+
+    	<div class="ui-corner-all custom-corners">
+        	<div class="ui-bar ui-bar-a">
+            	Shift Time
+        	</div>
+        	<div class="ui-body ui-body-a">
+            	<div class="ui-grid-a">
+                	<div class="ui-block-a">
+                    	<label>Start:</label>
+                    	@Html.DropDownListFor(m => m.roaster.ShiftStartTime, new SelectList(Model.startTimeList, "Key", "Value"), "Select Time", new { data_mini = "true",  id = "drpStart" })
+                	</div>
+                	<div class="ui-block-b">
+                    	<label>End:</label>
+                    	@Html.DropDownListFor(m => m.roaster.ShiftEndTime, new SelectList(Model.endTimeList, "Key", "Value"), "Select Time", new { data_mini = "true", id = "drpEnd" })
+                	</div>
+            	</div>
+
+
+        	</div>
+        	<input type="submit" value="Save" name="Save" class="ui-btn ui-mini ui-corner-all" id="btnSaveRoaster" />
+    	</div>
+
+
+	</div>
+	@Html.HiddenFor(m => m.roaster.selectedDatesString, new { id = "hdnPreSelectDates" })
+	@Html.HiddenFor(m => m.roaster.ProfileID)
+}
+
+
+<script type="text/javascript">
+
+
+	$(document).ready(function () {
+    	$('#dtSelectedDates').multiDatesPicker({
+        	altField: '#altField',
+        	minDate: 0,
+        	maxDate: 30
+       	 
+
+
+    	});
+	});
+
+
+
+
+	</script>
